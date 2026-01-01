@@ -1,0 +1,285 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #f0f0f0;
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Navigation Cards */
+      .nav-cards {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          z-index: 2000;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+
+      .nav-card {
+          background: white;
+          padding: 10px 15px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          text-decoration: none;
+          color: #333;
+          font-family: 'Architects Daughter', cursive;
+          font-weight: bold;
+          transform: rotate(var(--rot));
+          transition: transform 0.2s, box-shadow 0.2s;
+          border-bottom: 3px solid #ccc;
+          display: block;
+          text-align: center;
+          min-width: 100px;
+      }
+
+      .nav-card:hover {
+          transform: scale(1.1) rotate(0deg);
+          box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+          z-index: 2001;
+      }
+
+      .nav-card.active {
+          border-bottom-color: #007bff;
+          background: #f8f9ff;
+      } 
+
+
+/* START OF SECTION 1 */
+section {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    padding: 64px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px dashed #ccc;
+}
+/* BIG TITLE IN ALL SECTION */
+.big_title {
+    font-family: 'Architects Daughter', cursive;
+}
+/* BIG TITLE IN SECTION 1 AND 2 */
+.section-title {
+    font-size: 48px;
+    margin-bottom: 32px;
+    color: #333;
+    text-align: center;
+}
+/* ABOUT NOTE */
+.section1 .content-box {
+    background: #ffffff;
+    padding: 48px;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    border-left: 10px solid #ffc107;
+    position: relative;
+}
+/* ADHESIVE TAPE OF NOTE */
+.section1 .content-box::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 150px;
+    height: 40px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+/* PARAGRAFS IN SECTION 1 */
+.section1 p {
+    font-size: 19px;
+    line-height: 26px;
+    color: #444;
+    margin-bottom: 24px;
+}
+/* END OF SECTION 1 */
+
+
+
+/* START OF SECTION 2 */
+.section2 {
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    border-bottom: 2px dashed #ccc;
+}
+/* TITLE OF SECTION 2 */
+.header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+/* H1 OF TITLE */
+.header h1 {
+    font-size: 40px;
+    margin-bottom: 8px;
+    color: #333;
+}
+/* PARAGRAP OF TITLE */
+.header p {
+    color: #666;
+    font-size: 16px;
+}
+/* RELATIONSHIP BETWEEN NOTE AND TITLE */
+.desk {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+/* NOTE SHAPES */
+.card-note {
+    position: absolute;
+    width: 300px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-top: 8px solid #ccc;
+    border-radius: 2px;
+    cursor: move;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+/* WHEN HOVER OVER A NOTE */
+.card-note:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 100 !important;
+}
+/* WHEN PRESSING OVER NOTE */
+.card-note:active {
+    cursor: grabbing;
+    transform: scale(1.05) !important;
+}
+/* TYPE OF NOTE */
+.category {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+/* TITLE OF NOTE */
+.card-note h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #333;
+}
+/* PARAGRAP OF NOTE */
+.card-note p {
+    font-size: 14px;
+    color: #666;
+    line-height: 20px;
+}
+/* BUTTON OF NOTE */
+.btn-link {
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 16px;
+    display: inline-block;
+    opacity: 0.8;
+}
+/* WHEN HOVER OVER A BUTTON */
+.btn-link:hover {
+    opacity: 1;
+}
+/* ADHESIVE TAPE OF NOTE*/
+.card-note::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 100px;
+    height: 30px;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Categories */
+.card-note.language {
+    border-top-color: #007bff;
+    color: #007bff;
+}
+
+.card-note.technologie {
+    border-top-color: #ffc107;
+    color: #ffc107;
+}
+
+.card-note.framework {
+    border-top-color: #e83e8c;
+    color: #e83e8c;
+}
+
+
+.card-note.language .category{
+    color: #007bff;
+}
+
+.card-note.technologie .category{
+    color: #ffc107;
+}
+
+.card-note.framework .category{
+    color: #e83e8c;
+}
+/* END OF SECTION 2 */
+
+
+
+/* START OF SECTION 3 */
+/* BIG NOTE */
+.section3 .content-box {
+    background: #ffffff;
+    padding: 48px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    border-right: 10px solid #007bff;
+    position: relative;
+}
+/* ADHESIVE TAPE OF NOTE*/
+.section3 .content-box::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    width: 120px;
+    height: 35px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.contact-item {
+    font-size: 19px;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.contact-item span {
+    font-weight: bold;
+    color: #007bff;
+}
+/* END OF SECTION 3 */
