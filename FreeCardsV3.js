@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // We stop the animation during the draw
             card.style.transition = 'none';
         });
-    });
-
     // Mouse movement
     document.addEventListener('mousemove', (e) => {
         if (activeCard) {
@@ -41,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // We calculate the new card place inside the desk
             let x = e.clientX - deskRect.left - offset.x;
             let y = e.clientY - deskRect.top - offset.y;
-            
+
             // Prevent the card from exiting the desk
             x = Math.max(0, Math.min(x, deskRect.width - activeCard.offsetWidth));
             y = Math.max(0, Math.min(y, deskRect.height - activeCard.offsetHeight));
@@ -50,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
             activeCard.style.top = y + 'px';
         }
     });
-
     //End of the mouse-up
     document.addEventListener('mouseup', () => {
         if (activeCard) {
@@ -58,6 +55,47 @@ document.addEventListener('DOMContentLoaded', () => {
             activeCard = null;
         }
     });
+
+
+        // Start of touchstart
+        card.addEventListener('touchstart', (e) => {
+            activeCard = card;
+            highestZ++;
+            card.style.zIndex = highestZ;
+            const rect = card.getBoundingClientRect();
+            const deskRect = desk.getBoundingClientRect();
+            // The card should remain directly under the touch
+            offset.x = e.touches[0].clientX - rect.left;
+            offset.y = e.touches[0].clientY - rect.top;
+            // We stop the animation during the draw
+            card.style.transition = 'none';
+        });
+    });
+    // Touch movement
+    document.addEventListener('touchmove', (e) => {
+        if (activeCard) {
+            e.preventDefault();
+            const deskRect = desk.getBoundingClientRect();
+            // We calculate the new card place inside the desk
+            let x = e.touches[0].clientX - deskRect.left - offset.x;
+            let y = e.touches[0].clientY - deskRect.top - offset.y;
+
+            // Prevent the card from exiting the desk
+            x = Math.max(0, Math.min(x, deskRect.width - activeCard.offsetWidth));
+            y = Math.max(0, Math.min(y, deskRect.height - activeCard.offsetHeight));
+            // Moving the card
+            activeCard.style.left = x + 'px';
+            activeCard.style.top = y + 'px';
+        }
+    });
+    //End of the touch-end
+    document.addEventListener('touchend', () => {
+        if (activeCard) {
+            activeCard.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
+            activeCard = null;
+        }
+    });
+    
     // put each card in a random place
     function scatterCards() {
         const deskRect = desk.getBoundingClientRect();
