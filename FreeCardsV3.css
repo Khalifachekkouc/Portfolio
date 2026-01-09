@@ -146,10 +146,8 @@ body {
     max-width: 400px;
     margin: 0;
     transform: none !important;
-    cursor: grab;
-  }
-  .card-note:active {
-    cursor: grabbing;
+    cursor: default;
+    pointer-events: none;
   }
   .header {
     position: relative;

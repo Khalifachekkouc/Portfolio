@@ -58,66 +58,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-        // Start of touchstart
-        card.addEventListener('touchstart', (e) => {
-            activeCard = card;
-            highestZ++;
-            card.style.zIndex = highestZ;
-            const rect = card.getBoundingClientRect();
-            const deskRect = desk.getBoundingClientRect();
-            // The card should remain directly under the touch
-            offset.x = e.touches[0].clientX - rect.left;
-            offset.y = e.touches[0].clientY - rect.top;
-            // We stop the animation during the draw
-            card.style.transition = 'none';
-        });
-    });
-    // Touch movement
-    document.addEventListener('touchmove', (e) => {
-        if (activeCard) {
-            e.preventDefault();
-            if (isMobile) {
-                // On mobile, handle vertical reordering
-                const touchY = e.touches[0].clientY;
-                const activeRect = activeCard.getBoundingClientRect();
-                const activeCenterY = activeRect.top + activeRect.height / 2;
-
-                // Find the card being hovered over
-                let targetCard = null;
-                cards.forEach(card => {
-                    if (card !== activeCard) {
-                        const cardRect = card.getBoundingClientRect();
-                        if (touchY >= cardRect.top && touchY <= cardRect.bottom) {
-                            targetCard = card;
-                        }
-                    }
-                });
-
-                // If hovering over another card, swap their orders
-                if (targetCard) {
-                    const activeOrder = parseInt(activeCard.style.order) || 0;
-                    const targetOrder = parseInt(targetCard.style.order) || 0;
-                    activeCard.style.order = targetOrder;
-                    targetCard.style.order = activeOrder;
-                }
-            } else {
+        // Start of touchstart - only add if not mobile
+        if (!isMobile) {
+            card.addEventListener('touchstart', (e) => {
+                activeCard = card;
+                highestZ++;
+                card.style.zIndex = highestZ;
+                const rect = card.getBoundingClientRect();
                 const deskRect = desk.getBoundingClientRect();
-                // We calculate the new card place inside the desk
-                let x = e.touches[0].clientX - deskRect.left - offset.x;
-                let y = e.touches[0].clientY - deskRect.top - offset.y;
-
-                // Prevent the card from exiting the desk
-                x = Math.max(0, Math.min(x, deskRect.width - activeCard.offsetWidth));
-                y = Math.max(0, Math.min(y, deskRect.height - activeCard.offsetHeight));
-                // Moving the card
-                activeCard.style.left = x + 'px';
-                activeCard.style.top = y + 'px';
-            }
+                // The card should remain directly under the touch
+                offset.x = e.touches[0].clientX - rect.left;
+                offset.y = e.touches[0].clientY - rect.top;
+                // We stop the animation during the draw
+                card.style.transition = 'none';
+            });
         }
     });
-    //End of the touch-end
+    // Touch movement - only handle if not mobile
+    document.addEventListener('touchmove', (e) => {
+        if (activeCard && !isMobile) {
+            e.preventDefault();
+            const deskRect = desk.getBoundingClientRect();
+            // We calculate the new card place inside the desk
+            let x = e.touches[0].clientX - deskRect.left - offset.x;
+            let y = e.touches[0].clientY - deskRect.top - offset.y;
+
+            // Prevent the card from exiting the desk
+            x = Math.max(0, Math.min(x, deskRect.width - activeCard.offsetWidth));
+            y = Math.max(0, Math.min(y, deskRect.height - activeCard.offsetHeight));
+            // Moving the card
+            activeCard.style.left = x + 'px';
+            activeCard.style.top = y + 'px';
+        }
+    });
+    //End of the touch-end - only handle if not mobile
     document.addEventListener('touchend', () => {
-        if (activeCard) {
+        if (activeCard && !isMobile) {
             activeCard.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
             activeCard = null;
         }
