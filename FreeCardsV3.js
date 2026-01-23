@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-        // Start of touchstart - only add if not mobile
+        // Start of touchstart - mobile
         if (!isMobile) {
             card.addEventListener('touchstart', (e) => {
                 activeCard = card;
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-    // Touch movement - only handle if not mobile
+    // Touch movement - mobile
     document.addEventListener('touchmove', (e) => {
         if (activeCard && !isMobile) {
             e.preventDefault();
