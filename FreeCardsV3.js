@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             activeCard = null;
         }
     });
-
-
         // Start of touchstart - mobile
         if (!isMobile) {
             card.addEventListener('touchstart', (e) => {
@@ -98,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             activeCard = null;
         }
     });
-    
+ 
     // put each card in a random place or arrange vertically on mobile
     function scatterCards() {
         isMobile = window.innerWidth <= 767;
